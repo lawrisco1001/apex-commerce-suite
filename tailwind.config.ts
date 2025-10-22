@@ -44,10 +44,21 @@ export default {
           DEFAULT: "hsl(var(--success))",
           foreground: "hsl(var(--success-foreground))",
         },
-        warning: {
-          DEFAULT: "hsl(var(--warning))",
-          foreground: "hsl(var(--warning-foreground))",
-        },
+				warning: {
+					DEFAULT: "hsl(var(--warning))",
+					foreground: "hsl(var(--warning-foreground))",
+				},
+				orange: {
+					DEFAULT: "hsl(var(--orange))",
+					foreground: "hsl(var(--orange-foreground))",
+					50: "hsl(24 100% 97%)",
+					100: "hsl(24 100% 93%)",
+					500: "hsl(24 100% 50%)",
+					600: "hsl(24 100% 45%)",
+					700: "hsl(24 100% 40%)",
+					900: "hsl(24 100% 20%)",
+					950: "hsl(24 100% 10%)",
+				},
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",

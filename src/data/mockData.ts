@@ -11,6 +11,7 @@ export interface Product {
   description: string;
   features: string[];
   inStock: boolean;
+  moq?: number;
 }
 
 export const mockProducts: Product[] = [
@@ -119,8 +120,29 @@ export const mockProducts: Product[] = [
     description: "Ultra-soft luxury bedding set made from 100% Egyptian cotton for the perfect night's sleep.",
     features: ["Egyptian cotton", "Thread count 1000", "Hypoallergenic", "Machine washable"],
     inStock: true,
+    moq: 100,
   },
 ];
+
+// Generate more products for infinite scroll
+export const generateMoreProducts = (startId: number, count: number): Product[] => {
+  const baseProducts = mockProducts;
+  const moreProducts: Product[] = [];
+  
+  for (let i = 0; i < count; i++) {
+    const baseProduct = baseProducts[i % baseProducts.length];
+    const id = startId + i;
+    moreProducts.push({
+      ...baseProduct,
+      id: id.toString(),
+      name: `${baseProduct.name} ${id}`,
+      price: baseProduct.price + (Math.random() * 100 - 50),
+      moq: Math.random() > 0.5 ? Math.floor(Math.random() * 100) + 1 : undefined,
+    });
+  }
+  
+  return moreProducts;
+};
 
 export const categories = [
   { id: "electronics", name: "Electronics", count: 12543 },

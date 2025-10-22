@@ -12,6 +12,7 @@ interface ProductCardProps {
   rating: number;
   reviews: number;
   badge?: string;
+  moq?: number;
   onAddToCart?: () => void;
 }
 
@@ -24,6 +25,7 @@ export const ProductCard = ({
   rating,
   reviews,
   badge,
+  moq,
   onAddToCart,
 }: ProductCardProps) => {
   const discount = originalPrice ? Math.round(((originalPrice - price) / originalPrice) * 100) : 0;
@@ -71,6 +73,10 @@ export const ProductCard = ({
             </span>
           )}
         </div>
+
+        {moq && (
+          <div className="text-xs text-muted-foreground">MOQ: {moq}</div>
+        )}
 
         <Button
           variant="cart"

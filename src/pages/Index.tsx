@@ -2,15 +2,20 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
-import { mockProducts } from "@/data/mockData";
-import { useState } from "react";
+import { TailoredSelections } from "@/components/TailoredSelections";
+import { PromoSection } from "@/components/PromoSection";
+import { mockProducts, generateMoreProducts } from "@/data/mockData";
+import { useState, useCallback } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import electronicsImg from "@/assets/category-electronics.jpg";
 import fashionImg from "@/assets/category-fashion.jpg";
 import homeImg from "@/assets/category-home.jpg";
 
 const Index = () => {
   const [cartCount, setCartCount] = useState(0);
+  const [displayedProducts, setDisplayedProducts] = useState(mockProducts);
+  const [page, setPage] = useState(1);
   const { toast } = useToast();
 
   const handleAddToCart = (productName: string) => {
@@ -21,7 +26,39 @@ const Index = () => {
     });
   };
 
+  const loadMore = useCallback(() => {
+    const startId = mockProducts.length + (page - 1) * 8;
+    const newProducts = generateMoreProducts(startId, 8);
+    setDisplayedProducts((prev) => [...prev, ...newProducts]);
+    setPage((prev) => prev + 1);
+  }, [page]);
+
+  const { targetRef } = useInfiniteScroll(loadMore);
+
   const trendingProducts = mockProducts.slice(0, 4);
+  
+  const tailoredSelections = [
+    {
+      title: "Premium Electronics & Gadgets",
+      views: "27K+",
+      items: mockProducts.slice(0, 6).map(p => ({
+        id: p.id,
+        image: p.image,
+        price: `$${p.price.toFixed(2)}`,
+        moq: p.moq ? `MOQ: ${p.moq}` : undefined,
+      })),
+    },
+    {
+      title: "Fashion Essentials",
+      views: "18K+",
+      items: mockProducts.slice(2, 8).map(p => ({
+        id: p.id,
+        image: p.image,
+        price: `$${p.price.toFixed(2)}`,
+        moq: p.moq ? `MOQ: ${p.moq}` : undefined,
+      })),
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -59,21 +96,52 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Trending Products */}
+        {/* Tailored Selections */}
+        <TailoredSelections selections={tailoredSelections} />
+
+        {/* Promo Sections */}
+        <section className="container py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <PromoSection
+              title="MarketHub Guaranteed"
+              subtitle="Your trusted platform"
+              features={["Quick order and pay", "On-time delivery", "Money-back guarantee"]}
+              buttonText="Explore now"
+              buttonLink="/products?tag=guaranteed"
+              variant="primary"
+              products={mockProducts.slice(0, 4).map(p => ({ id: p.id, image: p.image }))}
+            />
+            <PromoSection
+              title="Fast Customization"
+              subtitle="Tailored to your needs"
+              features={["Low MOQ", "14-day dispatch", "True to design"]}
+              buttonText="Explore now"
+              buttonLink="/products?tag=custom"
+              variant="secondary"
+              products={mockProducts.slice(4, 8).map(p => ({ id: p.id, image: p.image }))}
+            />
+          </div>
+        </section>
+
+        {/* Trending Products with Infinite Scroll */}
         <section className="container py-16 bg-muted/30">
           <div className="mb-8">
-            <h2 className="text-3xl font-bold mb-2">Trending Now</h2>
-            <p className="text-muted-foreground">Discover what's popular this week</p>
+            <h2 className="text-3xl font-bold mb-2">All Products</h2>
+            <p className="text-muted-foreground">Browse our complete collection</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {trendingProducts.map((product) => (
+            {displayedProducts.map((product) => (
               <ProductCard
                 key={product.id}
                 {...product}
                 onAddToCart={() => handleAddToCart(product.name)}
               />
             ))}
+          </div>
+          
+          <div ref={targetRef} className="h-20 flex items-center justify-center mt-8">
+            <div className="text-muted-foreground">Loading more products...</div>
           </div>
         </section>
 
