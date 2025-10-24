@@ -1,6 +1,8 @@
+'use client';
+
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { useRef } from "react";
 
 interface SelectionItem {
@@ -25,7 +27,7 @@ export const TailoredSelections = ({ selections }: TailoredSelectionsProps) => {
     <section className="container py-12">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold">Tailored Selections</h2>
-        <Link to="/products" className="text-primary hover:underline text-sm font-medium">
+        <Link href="/products" className="text-primary hover:underline text-sm font-medium">
           View more →
         </Link>
       </div>
@@ -76,7 +78,7 @@ const SelectionRow = ({ selection }: { selection: TailoredSelection }) => {
           {selection.items.map((item) => (
             <Link
               key={item.id}
-              to={`/product/${item.id}`}
+              href={`/product/${item.id}`}
               className="flex-shrink-0 w-40 group/item"
             >
               <div className="bg-muted rounded-lg overflow-hidden mb-2 aspect-square">

@@ -1,8 +1,10 @@
+'use client';
+
 import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 interface CartItem {
   id: string;
@@ -12,7 +14,7 @@ interface CartItem {
   quantity: number;
 }
 
-const Cart = () => {
+export default function Cart() {
   const [cartItems, setCartItems] = useState<CartItem[]>([
     {
       id: "1",
@@ -61,7 +63,7 @@ const Cart = () => {
         {cartItems.length === 0 ? (
           <div className="text-center py-16 bg-card rounded-xl">
             <p className="text-xl text-muted-foreground mb-4">Your cart is empty</p>
-            <Link to="/products">
+            <Link href="/products">
               <Button variant="hero" size="lg">Continue Shopping</Button>
             </Link>
           </div>
@@ -150,7 +152,7 @@ const Cart = () => {
                   Proceed to Checkout
                 </Button>
 
-                <Link to="/products" className="block">
+                <Link href="/products" className="block">
                   <Button variant="outline" className="w-full">
                     Continue Shopping
                   </Button>
@@ -168,6 +170,4 @@ const Cart = () => {
       </div>
     </div>
   );
-};
-
-export default Cart;
+}

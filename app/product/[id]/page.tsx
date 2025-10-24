@@ -1,5 +1,8 @@
+'use client';
+
 import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "next/navigation";
+import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -7,8 +10,9 @@ import { mockProducts } from "@/data/mockData";
 import { Star, ShoppingCart, Heart, Share2, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-const ProductDetail = () => {
-  const { id } = useParams();
+export default function ProductDetail() {
+  const params = useParams();
+  const id = params.id as string;
   const product = mockProducts.find((p) => p.id === id);
   const [cartCount, setCartCount] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -20,7 +24,7 @@ const ProductDetail = () => {
         <Header cartCount={cartCount} />
         <div className="container py-16 text-center">
           <h1 className="text-4xl font-bold mb-4">Product Not Found</h1>
-          <Link to="/products">
+          <Link href="/products">
             <Button>Browse Products</Button>
           </Link>
         </div>
@@ -173,6 +177,4 @@ const ProductDetail = () => {
       </div>
     </div>
   );
-};
-
-export default ProductDetail;
+}

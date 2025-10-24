@@ -1,10 +1,12 @@
+'use client';
+
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Package, Heart, Settings, MapPin } from "lucide-react";
 
-const Account = () => {
+export default function Account() {
   const orders = [
     {
       id: "ORD-2024-001",
@@ -174,6 +176,4 @@ const Account = () => {
       </div>
     </div>
   );
-};
-
-export default Account;
+}

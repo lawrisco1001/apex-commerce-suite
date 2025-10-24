@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+'use client';
+
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 interface CategoryCardProps {
@@ -10,7 +12,7 @@ interface CategoryCardProps {
 
 export const CategoryCard = ({ title, image, link, count }: CategoryCardProps) => {
   return (
-    <Link to={link} className="group">
+    <Link href={link} className="group">
       <div className="relative overflow-hidden rounded-xl bg-card border transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
         <div className="aspect-[16/9] overflow-hidden">
           <img

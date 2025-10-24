@@ -1,7 +1,9 @@
+'use client';
+
 import { Star, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 interface ProductCardProps {
   id: string;
@@ -32,7 +34,7 @@ export const ProductCard = ({
 
   return (
     <div className="group relative bg-card border rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-      <Link to={`/product/${id}`}>
+      <Link href={`/product/${id}`}>
         <div className="aspect-square overflow-hidden bg-muted">
           <img
             src={image}
@@ -51,7 +53,7 @@ export const ProductCard = ({
       )}
 
       <div className="p-4 space-y-3">
-        <Link to={`/product/${id}`}>
+        <Link href={`/product/${id}`}>
           <h3 className="font-semibold line-clamp-2 group-hover:text-primary transition-colors">
             {name}
           </h3>

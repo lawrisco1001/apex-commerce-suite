@@ -1,5 +1,7 @@
+'use client';
+
 import { ShoppingCart, Search, User, Camera, Zap } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -27,7 +29,7 @@ export const Header = ({ cartCount = 0 }: HeaderProps) => {
     <header className="sticky top-0 z-50 w-full bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
       <div className="border-b">
         <div className="container flex h-16 items-center gap-4">
-          <Link to="/" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2">
             <div className="h-8 w-8 rounded-lg gradient-primary" />
             <span className="text-xl font-bold">MarketHub</span>
           </Link>
@@ -67,15 +69,15 @@ export const Header = ({ cartCount = 0 }: HeaderProps) => {
           </div>
 
           <nav className="flex items-center gap-2">
-            <Link to="/products">
+            <Link href="/products">
               <Button variant="ghost">Products</Button>
             </Link>
-            <Link to="/account">
+            <Link href="/account">
               <Button variant="ghost" size="icon">
                 <User className="h-5 w-5" />
               </Button>
             </Link>
-            <Link to="/cart">
+            <Link href="/cart">
               <Button variant="ghost" size="icon" className="relative">
                 <ShoppingCart className="h-5 w-5" />
                 {cartCount > 0 && (
@@ -97,7 +99,7 @@ export const Header = ({ cartCount = 0 }: HeaderProps) => {
               {frequentSearches.map((term) => (
                 <Link
                   key={term}
-                  to={`/products?search=${term}`}
+                  href={`/products?search=${term}`}
                   className="whitespace-nowrap hover:underline"
                 >
                   {term}

@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from "react";
 import { Header } from "@/components/Header";
 import { ProductCard } from "@/components/ProductCard";
@@ -8,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
 
-const Products = () => {
+export default function Products() {
   const [cartCount, setCartCount] = useState(0);
   const [priceRange, setPriceRange] = useState([0, 1000]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -165,6 +167,4 @@ const Products = () => {
       </div>
     </div>
   );
-};
-
-export default Products;
+}

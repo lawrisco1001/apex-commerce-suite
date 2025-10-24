@@ -1,5 +1,7 @@
+'use client';
+
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 interface PromoSectionProps {
   title: string;
@@ -43,7 +45,7 @@ export const PromoSection = ({
         </div>
       </div>
 
-      <Link to={buttonLink}>
+      <Link href={buttonLink}>
         <Button 
           variant="secondary" 
           className="mb-6 bg-white/10 backdrop-blur hover:bg-white/20 text-white border-white/20"
@@ -56,7 +58,7 @@ export const PromoSection = ({
         {products.map((product) => (
           <Link
             key={product.id}
-            to={`/product/${product.id}`}
+            href={`/product/${product.id}`}
             className="bg-white/10 backdrop-blur rounded-lg overflow-hidden hover:bg-white/20 transition-colors"
           >
             <img

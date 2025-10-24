@@ -1,6 +1,8 @@
+'use client';
+
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import heroBanner from "@/assets/hero-banner.jpg";
 
 export const Hero = () => {
@@ -27,13 +29,13 @@ export const Hero = () => {
             Shop millions of products from trusted sellers worldwide. Fast shipping, secure payments, and satisfaction guaranteed.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link to="/products">
+            <Link href="/products">
               <Button variant="hero" size="lg" className="group">
                 Shop Now
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
-            <Link to="/products?category=deals">
+            <Link href="/products?category=deals">
               <Button variant="outline" size="lg">
                 View Deals
               </Button>

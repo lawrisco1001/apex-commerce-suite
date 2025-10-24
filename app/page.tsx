@@ -1,3 +1,5 @@
+'use client';
+
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { CategoryCard } from "@/components/CategoryCard";
@@ -12,7 +14,7 @@ import electronicsImg from "@/assets/category-electronics.jpg";
 import fashionImg from "@/assets/category-fashion.jpg";
 import homeImg from "@/assets/category-home.jpg";
 
-const Index = () => {
+export default function Home() {
   const [cartCount, setCartCount] = useState(0);
   const [displayedProducts, setDisplayedProducts] = useState(mockProducts);
   const [page, setPage] = useState(1);
@@ -218,6 +220,4 @@ const Index = () => {
       </footer>
     </div>
   );
-};
-
-export default Index;
+}
